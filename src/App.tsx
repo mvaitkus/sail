@@ -21,7 +21,7 @@ const SailSizes: React.FC<SailSizesProps> = props => {
   const sailSizeForWind = (windStrengthKnots: number) =>
     (1.34 * props.weight) / windStrengthKnots;
 
-  const interestingWindRange = Array.from(new Array(30), (x, i) => i + 10);
+  const interestingWindRange = Array.from(new Array(27), (x, i) => i + 12);
   const sails = interestingWindRange.map(windKts => (
     <WindAndSailSize
       key={windKts}
