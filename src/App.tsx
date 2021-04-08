@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { atom, RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
+import { recoilPersist } from "recoil-persist";
 
 function App() {
   return (
@@ -16,9 +17,12 @@ function App() {
   );
 }
 
+const { persistAtom } = recoilPersist({ key: "config" });
+
 const windSpeedUnitState = atom({
   key: "windSpeedUnit",
-  default: "kts"
+  default: "kts",
+  effects_UNSTABLE: [persistAtom]
 });
 
 interface SailSizesProps {
@@ -26,7 +30,8 @@ interface SailSizesProps {
 }
 
 const SailSizes: React.FC<SailSizesProps> = props => {
-  const windSpeedUnit = useRecoilValue(windSpeedUnitState)
+  const windSpeedUnit = useRecoilValue(windSpeedUnitState);
+
   const sailSizeForWind = (windStrengthKnots: number) =>
     (1.34 * props.weight) / windStrengthKnots;
 
