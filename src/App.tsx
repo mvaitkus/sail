@@ -10,7 +10,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <RecoilRoot>
-          <SailSizes weight={82} />
+          <WindToSail />
         </RecoilRoot>
       </header>
     </div>
@@ -25,35 +25,6 @@ const windSpeedUnitState = atom({
   effects_UNSTABLE: [persistAtom]
 });
 
-interface SailSizesProps {
-  weight: number;
-}
-
-const SailSizes: React.FC<SailSizesProps> = props => {
-  const windSpeedUnit = useRecoilValue(windSpeedUnitState);
-
-  const sailSizeForWind = (windStrengthKnots: number) =>
-    (1.34 * props.weight) / windStrengthKnots;
-
-  const interestingWindRange = Array.from(new Array(27), (_, i) => i + 12);
-  const sails = interestingWindRange.map(windKts => (
-    <WindAndSailSize
-      key={windKts}
-      windStrengthKts={windKts}
-      sailSize={sailSizeForWind(windKts)}
-    />
-  ));
-  return (
-    <div>
-      <div>
-        <WindSpeedUnitSelector />
-      </div>
-      <div>Selected unit: {windSpeedUnit}</div>
-      {sails}
-    </div>
-  );
-};
-
 const WindSpeedUnitSelector: React.FC = () => {
   const [, setWindSpeedUnit] = useRecoilState(windSpeedUnitState);
   return (
@@ -66,15 +37,84 @@ const WindSpeedUnitSelector: React.FC = () => {
   );
 };
 
+const weightState = atom({
+  key: "weight",
+  default: 82,
+  effects_UNSTABLE: [persistAtom]
+});
+
+const windRangeKts = Array.from(new Array(27), (_, i) => i + 12);
+const windRangeMps = Array.from(new Array(27), (_, i) => i / 2 + 6);
+
+const sailSizeForWindKts = (weight: number, windStrengthKnots: number) =>
+  (1.34 * weight) / windStrengthKnots;
+
+const sailSizeForWindMps = (weight: number, windStrengthMps: number) =>
+  (0.6893 * weight) / windStrengthMps;
+
+const WindToSail: React.FC = () => {
+  const windSpeedUnit = useRecoilValue(windSpeedUnitState);
+  const weight = useRecoilValue(weightState);
+
+  const sails = (
+    <WindRangeToSails
+      windRange={windSpeedUnit === "kts" ? windRangeKts : windRangeMps}
+      weight={weight}
+      unit={windSpeedUnit}
+    />
+  );
+  return (
+    <div>
+      <div>
+        <WindSpeedUnitSelector />
+      </div>
+      {sails}
+    </div>
+  );
+};
+
+interface WindRangeToSailsProps {
+  windRange: Array<number>;
+  weight: number;
+  unit: string;
+}
+
+const WindRangeToSails: React.FC<WindRangeToSailsProps> = props => {
+  if (props.unit === "kts") {
+    const sails = props.windRange.map(windSpeed => (
+      <WindAndSailSize
+        key={windSpeed}
+        windSpeed={windSpeed.toFixed(0)}
+        unit="kts"
+        sailSize={sailSizeForWindKts(props.weight, windSpeed).toFixed(1)}
+      />
+    ));
+    return <div>{sails}</div>;
+  } else if (props.unit === "mps") {
+    const sails = props.windRange.map(windSpeed => (
+      <WindAndSailSize
+        key={windSpeed}
+        windSpeed={windSpeed.toFixed(1)}
+        unit="m\s"
+        sailSize={sailSizeForWindMps(props.weight, windSpeed).toFixed(1)}
+      />
+    ));
+    return <div>{sails}</div>;
+  } else {
+    return <div>TBD</div>;
+  }
+};
+
 interface WindAndSailSizeProps {
-  windStrengthKts: number;
-  sailSize: number;
+  windSpeed: string;
+  sailSize: string;
+  unit: string;
 }
 
 const WindAndSailSize: React.FC<WindAndSailSizeProps> = props => {
   return (
     <div>
-      {props.windStrengthKts} kts = {props.sailSize.toFixed(1)} m2
+      {props.windSpeed} {props.unit} = {props.sailSize} m2
     </div>
   );
 };
