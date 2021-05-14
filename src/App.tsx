@@ -1,6 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, NavLink, Route, Switch } from "react-router-dom";
 
 import { RecoilRoot } from "recoil";
 import { WindToSail } from "./WindToSail";
@@ -10,20 +9,25 @@ function App() {
     <div className="App">
       <RecoilRoot>
         <Router>
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
+          <header>
             <div className="App-menu">
-              <Link to="/" className="App-link">
-                Wind
-              </Link>
-              <Link to="/my" className="App-link">
-                My Sails
-              </Link>
+              <NavLink to="/" className="App-link" exact >
+                <div className="App-menu-item">Wind</div>
+              </NavLink>
+              <NavLink to="/my" className="App-link">
+                <div className="App-menu-item">My Sails</div>
+              </NavLink>
+              <NavLink to="/settings" className="App-link">
+                <div className="App-menu-item">Settings</div>
+              </NavLink>
             </div>
           </header>
           <Switch>
             <Route path="/my">
               <div>My sails component</div>
+            </Route>
+            <Route path="/settings">
+              <div>Settings component</div>
             </Route>
             <Route path="/">
               <WindToSail />
