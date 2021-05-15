@@ -3,8 +3,8 @@ import { useRecoilValue } from "recoil";
 import { windSpeedUnitState, weightState } from "./state";
 import { WindSpeedUnitSelector } from "./WindSpeedUnitSelector";
 
-const windRangeKts = Array.from(new Array(27), (_, i) => i + 12);
-const windRangeMps = Array.from(new Array(27), (_, i) => i / 2 + 6);
+const windRangeKts = Array.from(new Array(23), (_, i) => i + 12);
+const windRangeMps = Array.from(new Array(23), (_, i) => i / 2 + 6);
 
 const sailSizeForWindKts = (weight: number, windStrengthKnots: number) =>
   (1.34 * weight) / windStrengthKnots;
