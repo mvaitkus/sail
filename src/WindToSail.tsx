@@ -67,8 +67,12 @@ interface WindAndSailSizeProps {
 }
 
 const WindAndSailSize: React.FC<WindAndSailSizeProps> = props => {
+  // TODO: add a proper class
+  const style = {
+    lineHeight: "200%"
+  }
   return (
-    <div>
+    <div style={style}>
       {props.windSpeed} {props.unit} = {props.sailSize} m2
     </div>
   );
