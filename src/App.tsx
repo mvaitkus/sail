@@ -1,8 +1,14 @@
 import "./App.css";
-import { BrowserRouter as Router, NavLink, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  NavLink,
+  Route,
+  Switch
+} from "react-router-dom";
 
 import { RecoilRoot } from "recoil";
 import { WindToSail } from "./WindToSail";
+import { Settings } from "./Settings";
 
 function App() {
   return (
@@ -11,7 +17,7 @@ function App() {
         <Router basename="/sail">
           <header>
             <div className="App-menu">
-              <NavLink to="/" className="App-link" exact >
+              <NavLink to="/" className="App-link" exact>
                 <div className="App-menu-item">Wind</div>
               </NavLink>
               <NavLink to="/my" className="App-link">
@@ -24,10 +30,10 @@ function App() {
           </header>
           <Switch>
             <Route path="/my">
-              <div>My sails component</div>
+              <div>Coming soon</div>
             </Route>
             <Route path="/settings">
-              <div>Settings component</div>
+              <Settings />
             </Route>
             <Route path="/">
               <WindToSail />

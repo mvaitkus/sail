@@ -1,0 +1,25 @@
+.container {
+  margin: 30px;
+}
+
+.controls {
+  margin: 30px auto;
+  max-width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.minus {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: url("./minus.svg") no-repeat;
+}
+
+.plus {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: url("./plus.svg") no-repeat;
+}
