@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <RecoilRoot>
-        <Router>
+        <Router basename="/sail">
           <header>
             <div className="App-menu">
               <NavLink to="/" className="App-link" exact >
