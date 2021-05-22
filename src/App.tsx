@@ -1,6 +1,6 @@
 import "./App.css";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   NavLink,
   Route,
   Switch
@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <RecoilRoot>
-        <Router basename="/sail">
+        <Router basename="/" hashType="noslash">
           <header>
             <div className="App-menu">
               <NavLink to="/" className="App-link" exact>
@@ -29,14 +29,14 @@ function App() {
             </div>
           </header>
           <Switch>
+            <Route path="/" exact>
+              <WindToSail />
+            </Route>
             <Route path="/my">
               <div>Coming soon</div>
             </Route>
             <Route path="/settings">
               <Settings />
-            </Route>
-            <Route path="/">
-              <WindToSail />
             </Route>
           </Switch>
         </Router>
