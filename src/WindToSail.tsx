@@ -20,7 +20,6 @@ export const WindToSail: React.FC = () => {
     <div>
       <WindSpeedUnitSelector />
       <WindRangeToSails
-        windRange={windSpeedUnit === "kts" ? windRangeKts : windRangeMps}
         weight={weight}
         unit={windSpeedUnit}
       />
@@ -29,14 +28,13 @@ export const WindToSail: React.FC = () => {
 };
 
 interface WindRangeToSailsProps {
-  windRange: Array<number>;
   weight: number;
   unit: string;
 }
 
 const WindRangeToSails: React.FC<WindRangeToSailsProps> = props => {
   if (props.unit === "kts") {
-    const sails = props.windRange.map(windSpeed => (
+    const sails = windRangeKts.map(windSpeed => (
       <WindAndSailSize
         key={windSpeed}
         windSpeed={windSpeed.toFixed(0)}
@@ -46,7 +44,7 @@ const WindRangeToSails: React.FC<WindRangeToSailsProps> = props => {
     ));
     return <div>{sails}</div>;
   } else if (props.unit === "mps") {
-    const sails = props.windRange.map(windSpeed => (
+    const sails = windRangeMps.map(windSpeed => (
       <WindAndSailSize
         key={windSpeed}
         windSpeed={windSpeed.toFixed(1)}
