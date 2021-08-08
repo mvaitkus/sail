@@ -9,6 +9,7 @@ import {
 import { RecoilRoot } from "recoil";
 import { WindToSail } from "./WindToSail";
 import { Settings } from "./Settings";
+import { MySails } from "./MySails";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
               <WindToSail />
             </Route>
             <Route path="/my">
-              <div>Coming soon</div>
+              <MySails />
             </Route>
             <Route path="/settings">
               <Settings />
