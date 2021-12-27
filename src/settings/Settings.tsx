@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import styles from "./Settings.module.css";
-import { weightState } from "./state";
+import { weightState } from "../common/state";
 
 export const Settings: React.FC = () => {
   const [weight, setWeight] = useRecoilState(weightState);

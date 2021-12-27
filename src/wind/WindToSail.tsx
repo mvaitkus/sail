@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { windSpeedUnitState, weightState } from "./state";
-import { WindSpeedUnitSelector } from "./WindSpeedUnitSelector";
+import { windSpeedUnitState, weightState } from "../common/state";
+import { WindSpeedUnitSelector } from "../windunit";
 
 const windRangeKts = Array.from(new Array(23), (_, i) => i + 12);
 const windRangeMps = Array.from(new Array(23), (_, i) => i / 2 + 6);

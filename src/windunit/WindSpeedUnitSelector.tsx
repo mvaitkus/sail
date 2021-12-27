@@ -1,7 +1,7 @@
 import styles from "./WindSpeedUnitSelector.module.css";
 import React from "react";
 import { useRecoilState } from "recoil";
-import { windSpeedUnitState } from "./state";
+import { windSpeedUnitState } from "../common/state";
 
 export const WindSpeedUnitSelector: React.FC = () => {
   const [currentUnit, setWindSpeedUnit] = useRecoilState(windSpeedUnitState);

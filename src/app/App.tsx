@@ -7,11 +7,11 @@ import {
 } from "react-router-dom";
 
 import { RecoilRoot } from "recoil";
-import { WindToSail } from "./WindToSail";
-import { Settings } from "./Settings";
-import { MySails } from "./MySails";
+import { WindToSail } from "../wind";
+import { Settings } from "../settings";
+import { MySails } from "../mysails";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <RecoilRoot>
@@ -46,4 +46,3 @@ function App() {
   );
 }
 
-export default App;

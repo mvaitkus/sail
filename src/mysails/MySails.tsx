@@ -5,7 +5,7 @@ import {
   useSetRecoilState,
   atom
 } from "recoil";
-import { sailsState } from "./state";
+import { sailsState } from "../common/state";
 import { v4 } from "uuid";
 
 import { Formik, Field, Form, FormikHelpers } from "formik";
