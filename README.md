@@ -1,6 +1,24 @@
-# Getting Started with Create React App
+Mobile screen friendly sail size calculator
+
+Found it helpful when you have a wind station and lots of sails to choose from at a rental spot.
+
+Sails size calculations are from James Douglass work.
+
+Visit his great blog at: http://jimbodouglass.blogspot.com
+
+# Use
+
+Code is deployed on https://mvaitkus.github.io/sail/
+
+This is frontend only project and it uses browser local storage for settings and sails.
+
+Feel free to fork the repo if you want to change anything or you can create an issue and I'll add a missing feature (no promises though).
+
+# Development
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+I personally use `nvm` in order not to forget which node version was used to develop this, so you can run `nvm use` / `nvm install` before you run anything else.
 
 ## Available Scripts
 
@@ -28,6 +46,10 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run deploy`
+
+Builds the project and uses `gh-pages` library to deploy a new version of github pages for the repo.
 
 ### `npm run eject`
 
