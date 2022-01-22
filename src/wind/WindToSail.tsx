@@ -2,15 +2,10 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { windSpeedUnitState, weightState } from "../common/state";
 import { WindSpeedUnitSelector } from "../windunit";
+import { sailSizeForWindKts, sailSizeForWindMps } from "../math";
 
 const windRangeKts = Array.from(new Array(23), (_, i) => i + 12);
 const windRangeMps = Array.from(new Array(23), (_, i) => i / 2 + 6);
-
-const sailSizeForWindKts = (weight: number, windStrengthKnots: number) =>
-  (1.34 * weight) / windStrengthKnots;
-
-const sailSizeForWindMps = (weight: number, windStrengthMps: number) =>
-  (0.6893 * weight) / windStrengthMps;
 
 export const WindToSail: React.FC = () => {
   const windSpeedUnit = useRecoilValue(windSpeedUnitState);

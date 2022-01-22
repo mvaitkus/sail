@@ -1,0 +1,19 @@
+.sailContainer {
+    display: flex;
+    flex-direction: row;
+    margin: 0 24px;
+    justify-content: space-between;
+}
+
+.rangeContainer {
+    margin: 0 auto 1em;
+    max-width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  
+  .rangeItem {
+    width: 101px;
+    font-size: 16px;
+  }

@@ -1,7 +1,6 @@
 import { FC } from "react";
 import {
   useRecoilState,
-  useRecoilValue,
   useSetRecoilState,
   atom
 } from "recoil";
@@ -9,6 +8,9 @@ import { sailsState } from "../common/state";
 import { v4 } from "uuid";
 
 import { Formik, Field, Form, FormikHelpers } from "formik";
+import { SailsList } from "./SailsList";
+
+import { WindSpeedUnitSelector } from "../windunit";
 
 const pageState = atom({
   key: "mySailsPageState",
@@ -16,42 +18,20 @@ const pageState = atom({
 });
 
 export const MySails: FC = () => {
-  const page = useRecoilValue(pageState);
+  const [page, setPage] = useRecoilState(pageState);
 
   if (page === "list") {
-    return <SailsList />;
+    return (
+      <div>
+        This is work in progress, proper visual design TBD
+        <WindSpeedUnitSelector />
+        <SailsList />
+        <button onClick={_ => setPage("new")}>Add new sail</button>
+      </div>
+    );
   } else {
     return <AddSail />;
   }
-};
-
-const SailsList: FC = () => {
-  const setPage = useSetRecoilState(pageState);
-  const [sails, setSails] = useRecoilState(sailsState);
-
-  function removeSail(id: string) {
-    const sailsWithoutRemoved = sails.filter(sail => sail.id !== id);
-    setSails(sailsWithoutRemoved);
-  }
-
-  const sortedSails = sails.sort(function(a, b) {
-    return b.size - a.size;
-  });
-
-  return (
-    <div>
-      <div>My sails</div>
-      {sortedSails.map(sail => (
-        <div key={sail.id}>
-          {sail.name} {sail.size.toFixed(1)}{" "}
-          <button type="button" onClick={_ => removeSail(sail.id)}>
-            X
-          </button>
-        </div>
-      ))}
-      <button onClick={_ => setPage("new")}>Add new sail</button>
-    </div>
-  );
 };
 
 interface NewSail {
@@ -59,6 +39,7 @@ interface NewSail {
   size: string;
 }
 
+// TODO: extract to separate component (going back should probably come as function instead of depending on page state)
 const AddSail: FC = () => {
   const setPage = useSetRecoilState(pageState);
   const [sails, setSails] = useRecoilState(sailsState);
@@ -125,6 +106,7 @@ const AddSail: FC = () => {
                   id="size"
                   name="size"
                   placeholder="4.7"
+                  step="0.1"
                   validate={validateSize}
                 />
                 {errors.size && touched.size && <div>{errors.size}</div>}
